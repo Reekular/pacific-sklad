@@ -99,6 +99,11 @@ if (logChannel) {
     save();
 
     await interaction.reply(`Odebráno ${amount} ${item}`);
+    const logChannel = client.channels.cache.get(logChannelId);
+
+if (logChannel) {
+  logChannel.send(`🟥 ${interaction.user.username} odebral ${amount} ${item}`);
+}
   }
 
   if (interaction.commandName === 'stav') {
