@@ -4,6 +4,7 @@ const fs = require('fs');
 
 const token = process.env.TOKEN;
 const clientId = process.env.CLIENT_ID;
+const logChannelId = '1508403396577857606';
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds]
@@ -78,6 +79,11 @@ client.on('interactionCreate', async interaction => {
     save();
 
     await interaction.reply(`Přidáno ${amount} ${item}`);
+    const logChannel = client.channels.cache.get(logChannelId);
+
+if (logChannel) {
+  logChannel.send(`🟩 ${interaction.user.username} přidal ${amount} ${item}`);
+}
   }
 
   if (interaction.commandName === 'odebrat') {
